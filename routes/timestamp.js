@@ -3,7 +3,7 @@ const router = express.Router();
 
 // Ruta para manejar fechas con o sin parámetro
 router.get('/:date?', (req, res) => {
-  const { date } = req.params;
+  let { date } = req.params;
 
   let dateObj;
 
@@ -12,11 +12,10 @@ router.get('/:date?', (req, res) => {
     dateObj = new Date();
   } else {
     // Ver si la fecha es un timestamp en milisegundos (solo números)
-    if (!isNaN(date)) {
-      // Ver si la fecha es un timestamp numérico
-      dateObj = new Date(parseInt(date));
+    if (/^\d+$/.test(date)) {
+      dateObj = new Date(parseInt(date));  // Parsear la fecha como timestamp
     } else {
-      // Intentar parsear la fecha como cadena
+      // Parsear la fecha como una cadena en formato ISO
       dateObj = new Date(date);
     }
   }
@@ -28,8 +27,8 @@ router.get('/:date?', (req, res) => {
 
   // Respuesta JSON con formato UNIX y UTC
   return res.json({
-    unix: dateObj.getTime(),
-    utc: dateObj.toUTCString(),
+    unix: dateObj.getTime(),  // Milisegundos desde el 1 de enero de 1970
+    utc: dateObj.toUTCString()  // Fecha en formato UTC
   });
 });
 
