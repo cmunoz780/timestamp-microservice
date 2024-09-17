@@ -4,7 +4,6 @@ const router = express.Router();
 // Ruta para manejar fechas con o sin parámetro
 router.get('/:date?', (req, res) => {
   let { date } = req.params;
-
   let dateObj;
 
   // Si no se proporciona fecha, usar la fecha actual
@@ -21,7 +20,7 @@ router.get('/:date?', (req, res) => {
   }
 
   // Validar si la fecha es válida
-  if (dateObj.toString() === "Invalid Date") {
+  if (isNaN(dateObj.getTime())) {
     return res.json({ error: "Invalid Date" });
   }
 
