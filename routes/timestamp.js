@@ -13,6 +13,7 @@ router.get('/:date?', (req, res) => {
   } else {
     // Ver si la fecha es un timestamp en milisegundos (solo números)
     if (!isNaN(date)) {
+      // Ver si la fecha es un timestamp numérico
       dateObj = new Date(parseInt(date));
     } else {
       // Intentar parsear la fecha como cadena
@@ -26,7 +27,7 @@ router.get('/:date?', (req, res) => {
   }
 
   // Respuesta JSON con formato UNIX y UTC
-  res.json({
+  return res.json({
     unix: dateObj.getTime(),
     utc: dateObj.toUTCString(),
   });

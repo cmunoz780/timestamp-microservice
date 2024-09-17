@@ -1,15 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <title>Timestamp Microservice</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pruebas API Timestamp</title>
 </head>
 <body>
-  <h1>Welcome to the Timestamp Microservice</h1>
-  <p>Use the API endpoints to retrieve Unix and UTC timestamps:</p>
-  <ul>
-    <li><a href="/api/hello">/api/hello</a> - JSON greeting</li>
-    <li><a href="/api/2022-12-25">/api/2022-12-25</a> - Timestamp for a specific date</li>
-    <li><a href="/api/1451001600000">/api/1451001600000</a> - Timestamp for a Unix time</li>
-  </ul>
+  <h1>Probar API Timestamp</h1>
+
+  <!-- Formulario para ingresar una fecha -->
+  <label for="date-input">Ingresa una fecha o timestamp:</label>
+  <input type="text" id="date-input" placeholder="Por ejemplo: 2022-12-25 o 1451001600000">
+  <button id="submit-btn">Enviar</button>
+
+  <h3>Resultado:</h3>
+  <pre id="output"></pre>
+
+  <script>
+    document.getElementById('submit-btn').addEventListener('click', function() {
+      const date = document.getElementById('date-input').value;
+      let apiUrl = '/api/';
+
+      // Si se ingresa una fecha, concatenarla al endpoint
+      if (date) {
+        apiUrl += date;
+      }
+
+      // Enviar solicitud a la API usando fetch
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          // Mostrar el resultado en el elemento <pre> en la página
+          document.getElementById('output').textContent = JSON.stringify(data, null, 2);
+        })
+        .catch(err => {
+          document.getElementById('output').textContent = `Error: ${err}`;
+        });
+    });
+  </script>
 </body>
 </html>
