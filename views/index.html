@@ -1,42 +1,31 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pruebas API Timestamp</title>
-</head>
-<body>
-  <h1>Probar API Timestamp</h1>
+<html>
+   <head>
+      <title>Timestamp Microservice | freeCodeCamp.org</title>
+      <link rel="shortcut icon" href="https://cdn.freecodecamp.org/universal/favicons/favicon-32x32.png" type="image/x-icon"/>
+      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+      <link href="style.css" rel="stylesheet" type="text/css">
+   </head>
 
-  <!-- Formulario para ingresar una fecha -->
-  <label for="date-input">Ingresa una fecha o timestamp:</label>
-  <input type="text" id="date-input" placeholder="Por ejemplo: 2022-12-25 o 1451001600000">
-  <button id="submit-btn">Enviar</button>
+   <body>
+      <h1>Timestamp Microservice</h1>
+      <hr />
+      <div class="container">
+         <h2>Example Usage:</h2>
+         <ul>
+            <li><a href="/api/2015-12-25">[project url]/api/2015-12-25</a></li>
+            <li><a href="/api/1451001600000">[project url]/api/1451001600000</a></li>
+         </ul>
 
-  <h3>Resultado:</h3>
-  <pre id="output"></pre>
-
-  <script>
-    document.getElementById('submit-btn').addEventListener('click', function() {
-      const date = document.getElementById('date-input').value;
-      let apiUrl = '/api/';
-
-      // Si se ingresa una fecha, concatenarla al endpoint
-      if (date) {
-        apiUrl += date;
-      }
-
-      // Enviar solicitud a la API usando fetch
-      fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-          // Mostrar el resultado en el elemento <pre> en la página
-          document.getElementById('output').textContent = JSON.stringify(data, null, 2);
-        })
-        .catch(err => {
-          document.getElementById('output').textContent = `Error: ${err}`;
-        });
-    });
-  </script>
-</body>
+         <h2>Example Output:</h2>
+         <p>
+            <code>{"unix":1451001600000, "utc":"Fri, 25 Dec 2015 00:00:00 GMT"}</code>
+         </p>
+      </div>
+      <div class="footer">
+         <p>
+            By <a href="https://www.freecodecamp.org/">freeCodeCamp.org</a>
+         </p>
+      </div>
+   </body>
 </html>
