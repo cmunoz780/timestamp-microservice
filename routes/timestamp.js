@@ -11,10 +11,11 @@ router.get('/:date?', (req, res) => {
   if (!date) {
     dateObj = new Date();
   } else {
-    // Ver si la fecha es un timestamp (milisegundos)
+    // Ver si la fecha es un timestamp en milisegundos
     if (!isNaN(date)) {
       dateObj = new Date(parseInt(date));
     } else {
+      // Intentar parsear la fecha como cadena
       dateObj = new Date(date);
     }
   }
